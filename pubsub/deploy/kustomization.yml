@@ -1,0 +1,8 @@
+namespace: pubsub-infrastructure
+namePrefix: sparrow-
+nameSuffix: "-dev"
+resources: # References to configs in current dir
+- namespace.yml
+- pubsub-service.yml
+- sub-server.yml
+- pub-server.yml

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-sub
+  labels:
+    app: node-sub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-sub
+  template:
+    metadata:
+      labels:
+        app: node-sub
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "node-sub"
+        dapr.io/app-port: "3000"
+        dapr.io/port: "3000"
+    spec:
+      containers:
+      - name: node-sub
+        image: cr1tterp0wer/dapr-test-pubsub-sub
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always

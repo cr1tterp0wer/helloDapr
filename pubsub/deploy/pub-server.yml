@@ -1,0 +1,27 @@
+apiVersion: apps/v1 #DEPLOYMENT CONFIG
+kind: Deployment
+metadata: #Deployment personal labels
+  name: node-pub
+  labels:
+    app: node-pub #Services use this to look up deployments
+spec:
+  replicas: 1
+  selector:
+    matchLabels: #Deployment should match all labels app:node-pub and manage them
+      app: node-pub
+  template: #POD CONFIG
+    metadata:
+      labels:
+        app: node-pub #Services use this to look up pods
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "node-pub"
+        dapr.io/app-port: "3500"
+        dapr.io/port: "3500"
+    spec:
+      containers:
+      - name: node-pub
+        image: cr1tterp0wer/dapr-test-pubsub-pub
+        ports:
+        - containerPort: 3500
+        imagePullPolicy: Always
